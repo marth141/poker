@@ -69,7 +69,7 @@ defmodule Poker do
 
     {:ok, deck_server} = make_a_deck_server()
     {:ok, _shuffled_deck} = shuffle_deck(deck_server)
-    {:ok, _burned_card} = burn_a_card(deck_server)
+    {:ok, burned_card_1} = burn_a_card(deck_server)
 
     hands =
       Enum.map(players, fn _player ->
@@ -81,13 +81,17 @@ defmodule Poker do
         %{hand: card_1 ++ card_2}
       end)
 
+    {:ok, burned_card_2} = burn_a_card(deck_server)
     {:ok, the_flop} = draw_the_flop(deck_server)
+    {:ok, burned_card_3} = burn_a_card(deck_server)
     {:ok, the_turn} = draw_the_turn(deck_server)
+    {:ok, burned_card_4} = burn_a_card(deck_server)
     {:ok, the_river} = draw_the_river(deck_server)
     {:ok, deck} = view_deck(deck_server)
     {:ok, _confirmation} = destroy_deck(deck_server)
 
     %{
+      burned_cards: burned_card_1 ++ burned_card_2 ++ burned_card_3 ++ burned_card_4,
       dealer: the_flop ++ the_turn ++ the_river,
       deck: deck,
       player_1: (hands |> Enum.at(0))[:hand],
@@ -102,8 +106,7 @@ defmodule Poker do
   end
 
   def draw_the_river(deck_server) do
-    with {:ok, _burned_card} <- burn_a_card(deck_server),
-         {:ok, river_card} <- draw_a_card(deck_server) do
+    with {:ok, river_card} <- draw_a_card(deck_server) do
       {:ok, river_card}
     else
       e -> e
@@ -111,8 +114,7 @@ defmodule Poker do
   end
 
   def draw_the_turn(deck_server) do
-    with {:ok, _burned_card} <- burn_a_card(deck_server),
-         {:ok, turn_card} <- draw_a_card(deck_server) do
+    with {:ok, turn_card} <- draw_a_card(deck_server) do
       {:ok, turn_card}
     else
       e -> e
@@ -120,8 +122,7 @@ defmodule Poker do
   end
 
   def draw_the_flop(deck_server) do
-    with {:ok, _burned_card} <- burn_a_card(deck_server),
-         {:ok, c1} <- draw_a_card(deck_server),
+    with {:ok, c1} <- draw_a_card(deck_server),
          {:ok, c2} <- draw_a_card(deck_server),
          {:ok, c3} <- draw_a_card(deck_server) do
       {:ok, c1 ++ c2 ++ c3}
