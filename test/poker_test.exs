@@ -7,16 +7,18 @@ defmodule PokerTest do
   end
 
   test "shuffle a deck" do
-    {:ok, deck} = Poker.make_a_deck()
-    {:ok, shuffled_deck} = Poker.make_a_shuffled_deck()
+    {:ok, deck_server} = Poker.make_a_deck_server()
+    {:ok, deck} = Poker.view_deck(deck_server)
+    {:ok, shuffled_deck} = Poker.shuffle_deck(deck_server)
 
     assert deck != shuffled_deck
   end
 
   test "make a deck" do
-    {:ok, deck} = Poker.make_a_deck()
+    {:ok, deck_server} = Poker.make_a_deck_server()
+    {:ok, deck} = Poker.view_deck(deck_server)
 
-    assert 52 = deck |> Enum.count()
+    assert {:ok, 52} = Poker.count_deck(deck_server)
 
     assert ^deck = [
              %Poker.Card{

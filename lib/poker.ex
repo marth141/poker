@@ -16,6 +16,43 @@ defmodule Poker do
     :world
   end
 
+  def draw_the_river(deck_server) do
+    with {:ok, _burned_card} <- burn_a_card(deck_server),
+         {:ok, river_card} <- draw_a_card(deck_server) do
+      {:ok, river_card}
+    else
+      e -> e
+    end
+  end
+
+  def draw_the_turn(deck_server) do
+    with {:ok, _burned_card} <- burn_a_card(deck_server),
+         {:ok, turn_card} <- draw_a_card(deck_server) do
+      {:ok, turn_card}
+    else
+      e -> e
+    end
+  end
+
+  def draw_the_flop(deck_server) do
+    with {:ok, _burned_card} <- burn_a_card(deck_server),
+         {:ok, c1} <- draw_a_card(deck_server),
+         {:ok, c2} <- draw_a_card(deck_server),
+         {:ok, c3} <- draw_a_card(deck_server) do
+      {:ok, c1 ++ c2 ++ c3}
+    else
+      e -> e
+    end
+  end
+
+  def burn_a_card(deck_server) do
+    with {:ok, card} <- GenServer.call(deck_server, :burn) do
+      {:ok, card}
+    else
+      e -> e
+    end
+  end
+
   def destroy_deck(deck_server) do
     with :ok <- GenServer.cast(deck_server, :destroy) do
       {:ok, "Destroyed Deck: #{inspect(deck_server)}"}
@@ -48,16 +85,16 @@ defmodule Poker do
     end
   end
 
-  def give_me_a_hand(deck_server) do
-    with {:ok, c1} <- give_me_a_card(deck_server),
-         {:ok, c2} <- give_me_a_card(deck_server) do
+  def draw_a_hand(deck_server) do
+    with {:ok, c1} <- draw_a_card(deck_server),
+         {:ok, c2} <- draw_a_card(deck_server) do
       {:ok, c1 ++ c2}
     else
       e -> e
     end
   end
 
-  def give_me_a_card(deck_server) do
+  def draw_a_card(deck_server) do
     with {:ok, c} <- GenServer.call(deck_server, :draw) do
       {:ok, c}
     else
@@ -68,22 +105,6 @@ defmodule Poker do
   def make_a_deck_server do
     with {:ok, deck_server} <- GenServer.start_link(Poker.DeckServer, :ok) do
       {:ok, deck_server}
-    else
-      e -> e
-    end
-  end
-
-  def make_a_deck do
-    with {:ok, deck} <- Poker.Deck.create() do
-      {:ok, deck}
-    else
-      e -> e
-    end
-  end
-
-  def make_a_shuffled_deck() do
-    with {:ok, deck} <- make_a_deck() |> Poker.Deck.shuffle() do
-      {:ok, deck}
     else
       e -> e
     end
