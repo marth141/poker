@@ -92,6 +92,7 @@ defmodule Poker do
              tail_five_sequence: tail_five_sequence
            } ->
           %{
+            high_card: highest_held_card,
             got_a_pair?: if(value_pairs |> Enum.count() == 1, do: true, else: false),
             got_a_two_pair?: if(value_pairs |> Enum.count() == 2, do: true, else: false),
             got_a_three_of_a_kind?: if(value_threes |> Enum.count() == 1, do: true, else: false),
