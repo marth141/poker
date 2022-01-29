@@ -46,7 +46,7 @@ defmodule Poker do
   end
 
   def burn_a_card(deck_server) do
-    with {:ok, card} <- GenServer.call(deck_server, :burn) do
+    with {:ok, card} <- draw_a_card(deck_server) do
       {:ok, card}
     else
       e -> e
