@@ -4,12 +4,13 @@ defmodule Poker.Deck do
     values = values()
 
     deck =
-      for {value_text, value_symbol} <- values, {suit_text, suit_symbol} <- suits do
+      for {value_text, value_symbol, value_number} <- values, {suit_text, suit_symbol} <- suits do
         %Poker.Card{
           value_text: value_text,
           suit_text: suit_text,
           value_symbol: value_symbol,
-          suit_symbol: suit_symbol
+          suit_symbol: suit_symbol,
+          value_number: value_number
         }
       end
 
@@ -37,19 +38,19 @@ defmodule Poker.Deck do
 
   defp values() do
     [
-      {"Ace", "A"},
-      {"Two", "2"},
-      {"Three", "3"},
-      {"Four", "4"},
-      {"Five", "5"},
-      {"Six", "6"},
-      {"Seven", "7"},
-      {"Eight", "8"},
-      {"Nine", "9"},
-      {"Ten", "10"},
-      {"Jack", "J"},
-      {"Queen", "Q"},
-      {"King", "K"}
+      {"Two", "2", 2},
+      {"Three", "3", 3},
+      {"Four", "4", 4},
+      {"Five", "5", 5},
+      {"Six", "6", 6},
+      {"Seven", "7", 7},
+      {"Eight", "8", 8},
+      {"Nine", "9", 9},
+      {"Ten", "10", 10},
+      {"Jack", "J", 11},
+      {"Queen", "Q", 12},
+      {"King", "K", 13},
+      {"Ace", "A", 14}
     ]
   end
 end

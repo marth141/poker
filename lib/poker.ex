@@ -16,6 +16,34 @@ defmodule Poker do
     :world
   end
 
+  def what_do_i_have(results) do
+    highest_card =
+      results.player_1 |> Enum.sort_by(fn card -> card.value_number end) |> List.first()
+
+    cards = results.player_1 ++ results.dealer
+
+    value_frequencies = Enum.frequencies_by(cards, fn card -> card.value_text end)
+
+    suit_frequencies = Enum.frequencies_by(cards, fn card -> card.suit_text end)
+
+    value_sorted = Enum.sort_by(cards, fn card -> {card.suit_text, card.value_number} end)
+    value_pairs = Enum.filter(value_frequencies, fn {_value, count} -> count == 2 end)
+    value_threes = Enum.filter(value_frequencies, fn {_value, count} -> count == 3 end)
+    value_fours = Enum.filter(value_frequencies, fn {_value, count} -> count == 4 end)
+    suit_pairs = Enum.filter(suit_frequencies, fn {_value, count} -> count == 2 end)
+    suit_threes = Enum.filter(suit_frequencies, fn {_value, count} -> count == 3 end)
+
+    %{
+      highest_card: highest_card,
+      value_sorted: value_sorted,
+      value_pairs: value_pairs,
+      value_threes: value_threes,
+      value_fours: value_fours,
+      suit_pairs: suit_pairs,
+      suit_threes: suit_threes
+    }
+  end
+
   def play_a_round(opts \\ []) do
     players = Keyword.get(opts, :players, 2)
     players = 1..players

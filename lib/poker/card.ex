@@ -6,5 +6,6 @@ defmodule Poker.Card do
     field(:suit_text, :string)
     field(:value_symbol, :string)
     field(:suit_symbol, :string)
+    field(:value_number, :integer)
   end
 end

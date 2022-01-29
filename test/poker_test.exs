@@ -22,316 +22,420 @@ defmodule PokerTest do
 
     assert ^deck = [
              %Poker.Card{
-               suit_text: "Spades",
+               id: nil,
                suit_symbol: "♠️",
-               value_text: "Ace",
-               value_symbol: "A"
-             },
-             %Poker.Card{
-               suit_text: "Clubs",
-               suit_symbol: "♣️",
-               value_text: "Ace",
-               value_symbol: "A"
-             },
-             %Poker.Card{
-               suit_text: "Hearts",
-               suit_symbol: "♥️",
-               value_text: "Ace",
-               value_symbol: "A"
-             },
-             %Poker.Card{
-               suit_text: "Diamonds",
-               suit_symbol: "♦️",
-               value_text: "Ace",
-               value_symbol: "A"
-             },
-             %Poker.Card{
                suit_text: "Spades",
-               suit_symbol: "♠️",
-               value_text: "Two",
-               value_symbol: "2"
+               value_number: 2,
+               value_symbol: "2",
+               value_text: "Two"
              },
              %Poker.Card{
-               suit_text: "Clubs",
+               id: nil,
                suit_symbol: "♣️",
-               value_text: "Two",
-               value_symbol: "2"
+               suit_text: "Clubs",
+               value_number: 2,
+               value_symbol: "2",
+               value_text: "Two"
              },
              %Poker.Card{
-               suit_text: "Hearts",
+               id: nil,
                suit_symbol: "♥️",
-               value_text: "Two",
-               value_symbol: "2"
+               suit_text: "Hearts",
+               value_number: 2,
+               value_symbol: "2",
+               value_text: "Two"
              },
              %Poker.Card{
-               suit_text: "Diamonds",
+               id: nil,
                suit_symbol: "♦️",
-               value_text: "Two",
-               value_symbol: "2"
+               suit_text: "Diamonds",
+               value_number: 2,
+               value_symbol: "2",
+               value_text: "Two"
              },
              %Poker.Card{
+               id: nil,
+               suit_symbol: "♠️",
                suit_text: "Spades",
-               suit_symbol: "♠️",
-               value_text: "Three",
-               value_symbol: "3"
+               value_number: 3,
+               value_symbol: "3",
+               value_text: "Three"
              },
              %Poker.Card{
-               suit_text: "Clubs",
+               id: nil,
                suit_symbol: "♣️",
-               value_text: "Three",
-               value_symbol: "3"
+               suit_text: "Clubs",
+               value_number: 3,
+               value_symbol: "3",
+               value_text: "Three"
              },
              %Poker.Card{
-               suit_text: "Hearts",
+               id: nil,
                suit_symbol: "♥️",
-               value_text: "Three",
-               value_symbol: "3"
+               suit_text: "Hearts",
+               value_number: 3,
+               value_symbol: "3",
+               value_text: "Three"
              },
              %Poker.Card{
-               suit_text: "Diamonds",
+               id: nil,
                suit_symbol: "♦️",
-               value_text: "Three",
-               value_symbol: "3"
+               suit_text: "Diamonds",
+               value_number: 3,
+               value_symbol: "3",
+               value_text: "Three"
              },
              %Poker.Card{
+               id: nil,
+               suit_symbol: "♠️",
                suit_text: "Spades",
-               suit_symbol: "♠️",
-               value_text: "Four",
-               value_symbol: "4"
+               value_number: 4,
+               value_symbol: "4",
+               value_text: "Four"
              },
              %Poker.Card{
-               suit_text: "Clubs",
+               id: nil,
                suit_symbol: "♣️",
-               value_text: "Four",
-               value_symbol: "4"
+               suit_text: "Clubs",
+               value_number: 4,
+               value_symbol: "4",
+               value_text: "Four"
              },
              %Poker.Card{
-               suit_text: "Hearts",
+               id: nil,
                suit_symbol: "♥️",
-               value_text: "Four",
-               value_symbol: "4"
+               suit_text: "Hearts",
+               value_number: 4,
+               value_symbol: "4",
+               value_text: "Four"
              },
              %Poker.Card{
-               suit_text: "Diamonds",
+               id: nil,
                suit_symbol: "♦️",
-               value_text: "Four",
-               value_symbol: "4"
+               suit_text: "Diamonds",
+               value_number: 4,
+               value_symbol: "4",
+               value_text: "Four"
              },
              %Poker.Card{
+               id: nil,
+               suit_symbol: "♠️",
                suit_text: "Spades",
-               suit_symbol: "♠️",
-               value_text: "Five",
-               value_symbol: "5"
+               value_number: 5,
+               value_symbol: "5",
+               value_text: "Five"
              },
              %Poker.Card{
-               suit_text: "Clubs",
+               id: nil,
                suit_symbol: "♣️",
-               value_text: "Five",
-               value_symbol: "5"
+               suit_text: "Clubs",
+               value_number: 5,
+               value_symbol: "5",
+               value_text: "Five"
              },
              %Poker.Card{
-               suit_text: "Hearts",
+               id: nil,
                suit_symbol: "♥️",
-               value_text: "Five",
-               value_symbol: "5"
+               suit_text: "Hearts",
+               value_number: 5,
+               value_symbol: "5",
+               value_text: "Five"
              },
              %Poker.Card{
-               suit_text: "Diamonds",
+               id: nil,
                suit_symbol: "♦️",
-               value_text: "Five",
-               value_symbol: "5"
+               suit_text: "Diamonds",
+               value_number: 5,
+               value_symbol: "5",
+               value_text: "Five"
              },
              %Poker.Card{
+               id: nil,
+               suit_symbol: "♠️",
                suit_text: "Spades",
-               suit_symbol: "♠️",
-               value_text: "Six",
-               value_symbol: "6"
+               value_number: 6,
+               value_symbol: "6",
+               value_text: "Six"
              },
              %Poker.Card{
-               suit_text: "Clubs",
+               id: nil,
                suit_symbol: "♣️",
-               value_text: "Six",
-               value_symbol: "6"
+               suit_text: "Clubs",
+               value_number: 6,
+               value_symbol: "6",
+               value_text: "Six"
              },
              %Poker.Card{
-               suit_text: "Hearts",
+               id: nil,
                suit_symbol: "♥️",
-               value_text: "Six",
-               value_symbol: "6"
+               suit_text: "Hearts",
+               value_number: 6,
+               value_symbol: "6",
+               value_text: "Six"
              },
              %Poker.Card{
-               suit_text: "Diamonds",
+               id: nil,
                suit_symbol: "♦️",
-               value_text: "Six",
-               value_symbol: "6"
+               suit_text: "Diamonds",
+               value_number: 6,
+               value_symbol: "6",
+               value_text: "Six"
              },
              %Poker.Card{
+               id: nil,
+               suit_symbol: "♠️",
                suit_text: "Spades",
-               suit_symbol: "♠️",
-               value_text: "Seven",
-               value_symbol: "7"
+               value_number: 7,
+               value_symbol: "7",
+               value_text: "Seven"
              },
              %Poker.Card{
-               suit_text: "Clubs",
+               id: nil,
                suit_symbol: "♣️",
-               value_text: "Seven",
-               value_symbol: "7"
+               suit_text: "Clubs",
+               value_number: 7,
+               value_symbol: "7",
+               value_text: "Seven"
              },
              %Poker.Card{
-               suit_text: "Hearts",
+               id: nil,
                suit_symbol: "♥️",
-               value_text: "Seven",
-               value_symbol: "7"
+               suit_text: "Hearts",
+               value_number: 7,
+               value_symbol: "7",
+               value_text: "Seven"
              },
              %Poker.Card{
-               suit_text: "Diamonds",
+               id: nil,
                suit_symbol: "♦️",
-               value_text: "Seven",
-               value_symbol: "7"
+               suit_text: "Diamonds",
+               value_number: 7,
+               value_symbol: "7",
+               value_text: "Seven"
              },
              %Poker.Card{
+               id: nil,
+               suit_symbol: "♠️",
                suit_text: "Spades",
-               suit_symbol: "♠️",
-               value_text: "Eight",
-               value_symbol: "8"
+               value_number: 8,
+               value_symbol: "8",
+               value_text: "Eight"
              },
              %Poker.Card{
-               suit_text: "Clubs",
+               id: nil,
                suit_symbol: "♣️",
-               value_text: "Eight",
-               value_symbol: "8"
+               suit_text: "Clubs",
+               value_number: 8,
+               value_symbol: "8",
+               value_text: "Eight"
              },
              %Poker.Card{
-               suit_text: "Hearts",
+               id: nil,
                suit_symbol: "♥️",
-               value_text: "Eight",
-               value_symbol: "8"
+               suit_text: "Hearts",
+               value_number: 8,
+               value_symbol: "8",
+               value_text: "Eight"
              },
              %Poker.Card{
-               suit_text: "Diamonds",
+               id: nil,
                suit_symbol: "♦️",
-               value_text: "Eight",
-               value_symbol: "8"
+               suit_text: "Diamonds",
+               value_number: 8,
+               value_symbol: "8",
+               value_text: "Eight"
              },
              %Poker.Card{
+               id: nil,
+               suit_symbol: "♠️",
                suit_text: "Spades",
-               suit_symbol: "♠️",
-               value_text: "Nine",
-               value_symbol: "9"
+               value_number: 9,
+               value_symbol: "9",
+               value_text: "Nine"
              },
              %Poker.Card{
-               suit_text: "Clubs",
+               id: nil,
                suit_symbol: "♣️",
-               value_text: "Nine",
-               value_symbol: "9"
+               suit_text: "Clubs",
+               value_number: 9,
+               value_symbol: "9",
+               value_text: "Nine"
              },
              %Poker.Card{
-               suit_text: "Hearts",
+               id: nil,
                suit_symbol: "♥️",
-               value_text: "Nine",
-               value_symbol: "9"
+               suit_text: "Hearts",
+               value_number: 9,
+               value_symbol: "9",
+               value_text: "Nine"
              },
              %Poker.Card{
-               suit_text: "Diamonds",
+               id: nil,
                suit_symbol: "♦️",
-               value_text: "Nine",
-               value_symbol: "9"
+               suit_text: "Diamonds",
+               value_number: 9,
+               value_symbol: "9",
+               value_text: "Nine"
              },
              %Poker.Card{
+               id: nil,
+               suit_symbol: "♠️",
                suit_text: "Spades",
-               suit_symbol: "♠️",
-               value_text: "Ten",
-               value_symbol: "10"
+               value_number: 10,
+               value_symbol: "10",
+               value_text: "Ten"
              },
              %Poker.Card{
-               suit_text: "Clubs",
+               id: nil,
                suit_symbol: "♣️",
-               value_text: "Ten",
-               value_symbol: "10"
+               suit_text: "Clubs",
+               value_number: 10,
+               value_symbol: "10",
+               value_text: "Ten"
              },
              %Poker.Card{
-               suit_text: "Hearts",
+               id: nil,
                suit_symbol: "♥️",
-               value_text: "Ten",
-               value_symbol: "10"
+               suit_text: "Hearts",
+               value_number: 10,
+               value_symbol: "10",
+               value_text: "Ten"
              },
              %Poker.Card{
-               suit_text: "Diamonds",
+               id: nil,
                suit_symbol: "♦️",
-               value_text: "Ten",
-               value_symbol: "10"
+               suit_text: "Diamonds",
+               value_number: 10,
+               value_symbol: "10",
+               value_text: "Ten"
              },
              %Poker.Card{
+               id: nil,
+               suit_symbol: "♠️",
                suit_text: "Spades",
-               suit_symbol: "♠️",
-               value_text: "Jack",
-               value_symbol: "J"
+               value_number: 11,
+               value_symbol: "J",
+               value_text: "Jack"
              },
              %Poker.Card{
-               suit_text: "Clubs",
+               id: nil,
                suit_symbol: "♣️",
-               value_text: "Jack",
-               value_symbol: "J"
+               suit_text: "Clubs",
+               value_number: 11,
+               value_symbol: "J",
+               value_text: "Jack"
              },
              %Poker.Card{
-               suit_text: "Hearts",
+               id: nil,
                suit_symbol: "♥️",
-               value_text: "Jack",
-               value_symbol: "J"
+               suit_text: "Hearts",
+               value_number: 11,
+               value_symbol: "J",
+               value_text: "Jack"
              },
              %Poker.Card{
-               suit_text: "Diamonds",
+               id: nil,
                suit_symbol: "♦️",
-               value_text: "Jack",
-               value_symbol: "J"
+               suit_text: "Diamonds",
+               value_number: 11,
+               value_symbol: "J",
+               value_text: "Jack"
              },
              %Poker.Card{
+               id: nil,
+               suit_symbol: "♠️",
                suit_text: "Spades",
-               suit_symbol: "♠️",
-               value_text: "Queen",
-               value_symbol: "Q"
+               value_number: 12,
+               value_symbol: "Q",
+               value_text: "Queen"
              },
              %Poker.Card{
-               suit_text: "Clubs",
+               id: nil,
                suit_symbol: "♣️",
-               value_text: "Queen",
-               value_symbol: "Q"
+               suit_text: "Clubs",
+               value_number: 12,
+               value_symbol: "Q",
+               value_text: "Queen"
              },
              %Poker.Card{
-               suit_text: "Hearts",
+               id: nil,
                suit_symbol: "♥️",
-               value_text: "Queen",
-               value_symbol: "Q"
+               suit_text: "Hearts",
+               value_number: 12,
+               value_symbol: "Q",
+               value_text: "Queen"
              },
              %Poker.Card{
-               suit_text: "Diamonds",
+               id: nil,
                suit_symbol: "♦️",
-               value_text: "Queen",
-               value_symbol: "Q"
+               suit_text: "Diamonds",
+               value_number: 12,
+               value_symbol: "Q",
+               value_text: "Queen"
              },
              %Poker.Card{
+               id: nil,
+               suit_symbol: "♠️",
                suit_text: "Spades",
-               suit_symbol: "♠️",
-               value_text: "King",
-               value_symbol: "K"
+               value_number: 13,
+               value_symbol: "K",
+               value_text: "King"
              },
              %Poker.Card{
-               suit_text: "Clubs",
+               id: nil,
                suit_symbol: "♣️",
-               value_text: "King",
-               value_symbol: "K"
+               suit_text: "Clubs",
+               value_number: 13,
+               value_symbol: "K",
+               value_text: "King"
              },
              %Poker.Card{
-               suit_text: "Hearts",
+               id: nil,
                suit_symbol: "♥️",
-               value_text: "King",
-               value_symbol: "K"
+               suit_text: "Hearts",
+               value_number: 13,
+               value_symbol: "K",
+               value_text: "King"
              },
              %Poker.Card{
-               suit_text: "Diamonds",
+               id: nil,
                suit_symbol: "♦️",
-               value_text: "King",
-               value_symbol: "K"
+               suit_text: "Diamonds",
+               value_number: 13,
+               value_symbol: "K",
+               value_text: "King"
+             },
+             %Poker.Card{
+               id: nil,
+               suit_symbol: "♠️",
+               suit_text: "Spades",
+               value_number: 14,
+               value_symbol: "A",
+               value_text: "Ace"
+             },
+             %Poker.Card{
+               id: nil,
+               suit_symbol: "♣️",
+               suit_text: "Clubs",
+               value_number: 14,
+               value_symbol: "A",
+               value_text: "Ace"
+             },
+             %Poker.Card{
+               id: nil,
+               suit_symbol: "♥️",
+               suit_text: "Hearts",
+               value_number: 14,
+               value_symbol: "A",
+               value_text: "Ace"
+             },
+             %Poker.Card{
+               id: nil,
+               suit_symbol: "♦️",
+               suit_text: "Diamonds",
+               value_number: 14,
+               value_symbol: "A",
+               value_text: "Ace"
              }
            ]
   end
