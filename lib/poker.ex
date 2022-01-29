@@ -20,7 +20,10 @@ defmodule Poker do
     cards = (results.player_1 ++ results.dealer) |> Enum.sort_by(fn card -> card.value_number end)
 
     highest_held_card =
-      results.player_1 |> Enum.sort_by(fn card -> card.value_number end) |> List.first()
+      if(results.player_1 |> Enum.any?(fn card -> card.value_text == "Ace" end),
+        do: results.player_1 |> Enum.sort_by(fn card -> card.value_number end) |> List.last(),
+        else: results.player_1 |> Enum.sort_by(fn card -> card.value_number end) |> List.first()
+      )
 
     value_frequencies = Enum.frequencies_by(cards, fn card -> card.value_text end)
 

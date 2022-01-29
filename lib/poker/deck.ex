@@ -38,6 +38,7 @@ defmodule Poker.Deck do
 
   defp values() do
     [
+      {"Ace", "A", 1},
       {"Two", "2", 2},
       {"Three", "3", 3},
       {"Four", "4", 4},
@@ -49,8 +50,7 @@ defmodule Poker.Deck do
       {"Ten", "10", 10},
       {"Jack", "J", 11},
       {"Queen", "Q", 12},
-      {"King", "K", 13},
-      {"Ace", "A", 14}
+      {"King", "K", 13}
     ]
   end
 end
