@@ -72,47 +72,26 @@ defmodule Poker do
     royal_flush? = Enum.any?(royal_frequencies, fn {_k, v} -> v == 5 end)
 
     %{
-      highest_held_card: highest_held_card,
-      value_sorted: value_sorted,
-      value_pairs: value_pairs,
-      value_threes: value_threes,
-      value_fours: value_fours,
-      suit_fives: suit_fives,
-      head_five_sequence: head_five_sequence,
-      tail_five_sequence: tail_five_sequence
+      high_card: highest_held_card,
+      got_a_pair?: if(value_pairs |> Enum.count() == 1, do: true, else: false),
+      got_a_two_pair?: if(value_pairs |> Enum.count() == 2, do: true, else: false),
+      got_a_three_of_a_kind?: if(value_threes |> Enum.count() == 1, do: true, else: false),
+      got_a_straight?: if(head_five_sequence or tail_five_sequence, do: true, else: false),
+      got_a_flush?: if(suit_fives |> Enum.count() == 1, do: true, else: false),
+      got_a_full_house?:
+        if(value_threes |> Enum.count() == 1 and value_pairs |> Enum.count() == 1,
+          do: true,
+          else: false
+        ),
+      got_a_four_of_a_kind?: if(value_fours |> Enum.count() == 1, do: true, else: false),
+      got_a_straight_flush?:
+        if((head_five_sequence or tail_five_sequence) and suit_fives |> Enum.count() == 1,
+          do: true,
+          else: false
+        ),
+      got_a_royal_flush?: if(royal_flush?, do: true, else: false),
+      hand: value_sorted
     }
-    |> (fn %{
-             highest_held_card: highest_held_card,
-             value_sorted: value_sorted,
-             value_pairs: value_pairs,
-             value_threes: value_threes,
-             value_fours: value_fours,
-             suit_fives: suit_fives,
-             head_five_sequence: head_five_sequence,
-             tail_five_sequence: tail_five_sequence
-           } ->
-          %{
-            high_card: highest_held_card,
-            got_a_pair?: if(value_pairs |> Enum.count() == 1, do: true, else: false),
-            got_a_two_pair?: if(value_pairs |> Enum.count() == 2, do: true, else: false),
-            got_a_three_of_a_kind?: if(value_threes |> Enum.count() == 1, do: true, else: false),
-            got_a_straight?: if(head_five_sequence or tail_five_sequence, do: true, else: false),
-            got_a_flush?: if(suit_fives |> Enum.count() == 1, do: true, else: false),
-            got_a_full_house?:
-              if(value_threes |> Enum.count() == 1 and value_pairs |> Enum.count() == 1,
-                do: true,
-                else: false
-              ),
-            got_a_four_of_a_kind?: if(value_fours |> Enum.count() == 1, do: true, else: false),
-            got_a_straight_flush?:
-              if((head_five_sequence or tail_five_sequence) and suit_fives |> Enum.count() == 1,
-                do: true,
-                else: false
-              ),
-            got_a_royal_flush?: if(royal_flush?, do: true, else: false),
-            hand: value_sorted
-          }
-        end).()
   end
 
   def play_a_round(opts \\ []) do
