@@ -23,6 +23,11 @@ defmodule Poker.DeckServer do
   end
 
   @impl true
+  def handle_call(:burn, _from, [c1 | deck]) do
+    {:reply, {:ok, c1}, deck}
+  end
+
+  @impl true
   def handle_call(:shuffle, _from, state) do
     shuffled_deck = Enum.shuffle(state)
     {:reply, shuffled_deck, shuffled_deck}
