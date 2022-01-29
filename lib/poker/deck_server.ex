@@ -3,7 +3,7 @@ defmodule Poker.DeckServer do
 
   @impl true
   def init(:ok) do
-    {:ok, deck} = Poker.make_a_deck()
+    {:ok, deck} = Poker.Deck.create()
     {:ok, deck}
   end
 
