@@ -17,10 +17,10 @@ defmodule Poker do
   end
 
   def what_do_i_have(results) do
+    cards = (results.player_1 ++ results.dealer) |> Enum.sort_by(fn card -> card.value_number end)
+
     highest_held_card =
       results.player_1 |> Enum.sort_by(fn card -> card.value_number end) |> List.first()
-
-    cards = (results.player_1 ++ results.dealer) |> Enum.sort_by(fn card -> card.value_number end)
 
     value_frequencies = Enum.frequencies_by(cards, fn card -> card.value_text end)
 
