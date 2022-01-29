@@ -80,7 +80,6 @@ defmodule Poker do
         {:ok, card_2} = draw_a_card(deck_server)
         %{hand: card_1 ++ card_2}
       end)
-      |> IO.inspect()
 
     {:ok, the_flop} = draw_the_flop(deck_server)
     {:ok, the_turn} = draw_the_turn(deck_server)
