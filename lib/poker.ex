@@ -16,21 +16,6 @@ defmodule Poker do
     :world
   end
 
-  def seq?(input), do: do_seq?(input, nil)
-  # We are done
-  defp do_seq?([], _), do: true
-
-  defp do_seq?([h | t], nil),
-    # entry
-    do: do_seq?(t, h)
-
-  defp do_seq?([h | t], ah) when ah == h - 1,
-    # success path
-    do: do_seq?(t, h)
-
-  # ouch! we failed
-  defp do_seq?(_, _), do: false
-
   def what_do_i_have(results) do
     highest_held_card =
       results.player_1 |> Enum.sort_by(fn card -> card.value_number end) |> List.first()
@@ -225,4 +210,18 @@ defmodule Poker do
       e -> e
     end
   end
+
+  # Sequence function provided by Aleksei Matiushkin on Stack Overflow
+  # https://stackoverflow.com/questions/66682671/how-to-check-if-an-array-is-in-sequential-and-consecutive-order-in-elixir
+  defp seq?(input), do: do_seq?(input, nil)
+
+  defp do_seq?([], _), do: true
+
+  defp do_seq?([h | t], nil),
+    do: do_seq?(t, h)
+
+  defp do_seq?([h | t], ah) when ah == h - 1,
+    do: do_seq?(t, h)
+
+  defp do_seq?(_, _), do: false
 end
