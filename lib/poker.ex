@@ -17,7 +17,7 @@ defmodule Poker do
   end
 
   def what_do_i_have(results) do
-    highest_card =
+    highest_hand_card =
       results.player_1 |> Enum.sort_by(fn card -> card.value_number end) |> List.first()
 
     cards = results.player_1 ++ results.dealer
@@ -26,22 +26,44 @@ defmodule Poker do
 
     suit_frequencies = Enum.frequencies_by(cards, fn card -> card.suit_text end)
 
-    value_sorted = Enum.sort_by(cards, fn card -> {card.suit_text, card.value_number} end)
+    value_sorted = Enum.sort_by(cards, fn card -> card.value_number end)
     value_pairs = Enum.filter(value_frequencies, fn {_value, count} -> count == 2 end)
     value_threes = Enum.filter(value_frequencies, fn {_value, count} -> count == 3 end)
     value_fours = Enum.filter(value_frequencies, fn {_value, count} -> count == 4 end)
-    suit_pairs = Enum.filter(suit_frequencies, fn {_value, count} -> count == 2 end)
-    suit_threes = Enum.filter(suit_frequencies, fn {_value, count} -> count == 3 end)
+    suit_fives = Enum.filter(suit_frequencies, fn {_value, count} -> count == 5 end)
 
     %{
-      highest_card: highest_card,
+      highest_hand_card: highest_hand_card,
       value_sorted: value_sorted,
       value_pairs: value_pairs,
       value_threes: value_threes,
       value_fours: value_fours,
-      suit_pairs: suit_pairs,
-      suit_threes: suit_threes
+      suit_fives: suit_fives
     }
+    |> IO.inspect(limit: :infinity)
+    |> (fn %{
+             highest_hand_card: highest_hand_card,
+             value_sorted: value_sorted,
+             value_pairs: value_pairs,
+             value_threes: value_threes,
+             value_fours: value_fours,
+             suit_fives: suit_fives
+           } ->
+          %{
+            got_a_pair?: if(value_pairs |> Enum.count() == 1, do: "You have a pair", else: nil),
+            got_a_two_pair?:
+              if(value_pairs |> Enum.count() == 2, do: "You have a two pair", else: nil),
+            got_a_three_of_a_kind?:
+              if(value_threes |> Enum.count() == 1, do: "You have a three of a kind", else: nil),
+            # Todo add straight
+            got_a_flush?: if(suit_fives |> Enum.count() == 1, do: "You have a flush", else: nil),
+            # Todo add full house
+            got_a_four_of_a_kind?:
+              if(value_fours |> Enum.count() == 1, do: "You have a four of a kind", else: nil)
+            # Todo add straight flush
+            # Todo add royal flush
+          }
+        end).()
   end
 
   def play_a_round(opts \\ []) do
