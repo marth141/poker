@@ -43,6 +43,17 @@ defmodule Poker do
       |> Enum.take(-5)
       |> seq?()
 
+    maybe_straight_flush =
+      if(head_five_sequence,
+        do: cards |> Enum.take(5),
+        else: if(tail_five_sequence, do: cards |> Enum.take(-5), else: [])
+      )
+
+    straight_flush_frequencies =
+      Enum.frequencies_by(maybe_straight_flush, fn card -> card.suit_text end)
+
+    straight_flush? = Enum.any?(straight_flush_frequencies, fn {_k, v} -> v == 5 end)
+
     tens = Enum.filter(cards, fn card -> card.value_text == "Ten" end)
     jacks = Enum.filter(cards, fn card -> card.value_text == "Jack" end)
     queens = Enum.filter(cards, fn card -> card.value_text == "Queen" end)
@@ -68,11 +79,7 @@ defmodule Poker do
           else: false
         ),
       got_a_four_of_a_kind?: if(value_fours |> Enum.count() == 1, do: true, else: false),
-      got_a_straight_flush?:
-        if((head_five_sequence or tail_five_sequence) and suit_fives |> Enum.count() == 1,
-          do: true,
-          else: false
-        ),
+      got_a_straight_flush?: if(straight_flush?, do: true, else: false),
       got_a_royal_flush?: if(royal_flush?, do: true, else: false),
       hand: cards
     }
