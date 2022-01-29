@@ -16,6 +16,10 @@ defmodule Poker do
     :world
   end
 
+  def play_a_hundred_thousand_games() do
+    Enum.map(1..100_000, fn _n -> Poker.play_a_round() |> Poker.what_do_i_have() end)
+  end
+
   def what_do_i_have(results) do
     cards = (results.player_1 ++ results.dealer) |> Enum.sort_by(fn card -> card.value_number end)
 
