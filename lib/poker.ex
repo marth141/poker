@@ -40,6 +40,14 @@ defmodule Poker do
     end
   end
 
+  def shuffle_deck(deck_server) do
+    with {:ok, deck} <- GenServer.call(deck_server, :shuffle) do
+      {:ok, deck}
+    else
+      e -> e
+    end
+  end
+
   def give_me_a_hand(deck_server) do
     with {:ok, c1} <- give_me_a_card(deck_server),
          {:ok, c2} <- give_me_a_card(deck_server) do
