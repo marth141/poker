@@ -50,16 +50,13 @@ defmodule Poker do
              suit_fives: suit_fives
            } ->
           %{
-            got_a_pair?: if(value_pairs |> Enum.count() == 1, do: "You have a pair", else: nil),
-            got_a_two_pair?:
-              if(value_pairs |> Enum.count() == 2, do: "You have a two pair", else: nil),
-            got_a_three_of_a_kind?:
-              if(value_threes |> Enum.count() == 1, do: "You have a three of a kind", else: nil),
+            got_a_pair?: if(value_pairs |> Enum.count() == 1, do: true, else: false),
+            got_a_two_pair?: if(value_pairs |> Enum.count() == 2, do: true, else: false),
+            got_a_three_of_a_kind?: if(value_threes |> Enum.count() == 1, do: true, else: false),
             # Todo add straight
-            got_a_flush?: if(suit_fives |> Enum.count() == 1, do: "You have a flush", else: nil),
+            got_a_flush?: if(suit_fives |> Enum.count() == 1, do: true, else: false),
             # Todo add full house
-            got_a_four_of_a_kind?:
-              if(value_fours |> Enum.count() == 1, do: "You have a four of a kind", else: nil)
+            got_a_four_of_a_kind?: if(value_fours |> Enum.count() == 1, do: true, else: false)
             # Todo add straight flush
             # Todo add royal flush
           }
