@@ -35,35 +35,34 @@ defmodule Poker do
     highest_held_card =
       results.player_1 |> Enum.sort_by(fn card -> card.value_number end) |> List.first()
 
-    cards = results.player_1 ++ results.dealer
+    cards = (results.player_1 ++ results.dealer) |> Enum.sort_by(fn card -> card.value_number end)
 
     value_frequencies = Enum.frequencies_by(cards, fn card -> card.value_text end)
 
     suit_frequencies = Enum.frequencies_by(cards, fn card -> card.suit_text end)
 
-    value_sorted = Enum.sort_by(cards, fn card -> card.value_number end)
     value_pairs = Enum.filter(value_frequencies, fn {_value, count} -> count == 2 end)
     value_threes = Enum.filter(value_frequencies, fn {_value, count} -> count == 3 end)
     value_fours = Enum.filter(value_frequencies, fn {_value, count} -> count == 4 end)
     suit_fives = Enum.filter(suit_frequencies, fn {_value, count} -> count == 5 end)
 
     head_five_sequence =
-      Enum.map(value_sorted, fn card -> card.value_number end)
+      Enum.map(cards, fn card -> card.value_number end)
       |> Enum.uniq()
       |> Enum.take(5)
       |> seq?()
 
     tail_five_sequence =
-      Enum.map(value_sorted, fn card -> card.value_number end)
+      Enum.map(cards, fn card -> card.value_number end)
       |> Enum.uniq()
       |> Enum.take(-5)
       |> seq?()
 
-    tens = Enum.filter(value_sorted, fn card -> card.value_text == "Ten" end)
-    jacks = Enum.filter(value_sorted, fn card -> card.value_text == "Jack" end)
-    queens = Enum.filter(value_sorted, fn card -> card.value_text == "Queen" end)
-    kings = Enum.filter(value_sorted, fn card -> card.value_text == "King" end)
-    aces = Enum.filter(value_sorted, fn card -> card.value_text == "Ace" end)
+    tens = Enum.filter(cards, fn card -> card.value_text == "Ten" end)
+    jacks = Enum.filter(cards, fn card -> card.value_text == "Jack" end)
+    queens = Enum.filter(cards, fn card -> card.value_text == "Queen" end)
+    kings = Enum.filter(cards, fn card -> card.value_text == "King" end)
+    aces = Enum.filter(cards, fn card -> card.value_text == "Ace" end)
 
     maybe_royal_hand = tens ++ jacks ++ queens ++ kings ++ aces
 
@@ -90,7 +89,7 @@ defmodule Poker do
           else: false
         ),
       got_a_royal_flush?: if(royal_flush?, do: true, else: false),
-      hand: value_sorted
+      hand: cards
     }
   end
 
