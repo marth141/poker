@@ -16,6 +16,42 @@ defmodule Poker do
     :world
   end
 
+  def play_a_round(opts \\ []) do
+    players = Keyword.get(opts, :players, 2)
+    players = 1..players
+
+    {:ok, deck_server} = make_a_deck_server()
+    {:ok, _shuffled_deck} = shuffle_deck(deck_server)
+    {:ok, _burned_card} = burn_a_card(deck_server)
+
+    hands =
+      Enum.map(players, fn _player ->
+        {:ok, card_1} = draw_a_card(deck_server)
+        %{hand: card_1}
+      end)
+      |> Enum.map(fn %{hand: card_1} ->
+        {:ok, card_2} = draw_a_card(deck_server)
+        %{hand: card_1 ++ card_2}
+      end)
+      |> IO.inspect()
+
+    {:ok, the_flop} = draw_the_flop(deck_server)
+    {:ok, the_turn} = draw_the_turn(deck_server)
+    {:ok, the_river} = draw_the_river(deck_server)
+    {:ok, deck} = view_deck(deck_server)
+    {:ok, _confirmation} = destroy_deck(deck_server)
+
+    %{
+      dealer: the_flop ++ the_turn ++ the_river,
+      deck: deck,
+      player_1: (hands |> Enum.at(0))[:hand],
+      player_2: (hands |> Enum.at(1))[:hand],
+      player_3: (hands |> Enum.at(2))[:hand],
+      player_4: (hands |> Enum.at(3))[:hand],
+      player_5: (hands |> Enum.at(4))[:hand]
+    }
+  end
+
   def draw_the_river(deck_server) do
     with {:ok, _burned_card} <- burn_a_card(deck_server),
          {:ok, river_card} <- draw_a_card(deck_server) do
