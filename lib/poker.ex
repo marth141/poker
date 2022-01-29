@@ -16,8 +16,23 @@ defmodule Poker do
     :world
   end
 
+  def seq?(input), do: do_seq?(input, nil)
+  # We are done
+  defp do_seq?([], _), do: true
+
+  defp do_seq?([h | t], nil),
+    # entry
+    do: do_seq?(t, h)
+
+  defp do_seq?([h | t], ah) when ah == h - 1,
+    # success path
+    do: do_seq?(t, h)
+
+  # ouch! we failed
+  defp do_seq?(_, _), do: false
+
   def what_do_i_have(results) do
-    highest_hand_card =
+    highest_held_card =
       results.player_1 |> Enum.sort_by(fn card -> card.value_number end) |> List.first()
 
     cards = results.player_1 ++ results.dealer
@@ -32,33 +47,69 @@ defmodule Poker do
     value_fours = Enum.filter(value_frequencies, fn {_value, count} -> count == 4 end)
     suit_fives = Enum.filter(suit_frequencies, fn {_value, count} -> count == 5 end)
 
+    head_five_sequence =
+      Enum.map(value_sorted, fn card -> card.value_number end)
+      |> Enum.uniq()
+      |> Enum.take(5)
+      |> seq?()
+
+    tail_five_sequence =
+      Enum.map(value_sorted, fn card -> card.value_number end)
+      |> Enum.uniq()
+      |> Enum.take(-5)
+      |> seq?()
+
+    tens = Enum.filter(value_sorted, fn card -> card.value_text == "Ten" end)
+    jacks = Enum.filter(value_sorted, fn card -> card.value_text == "Jack" end)
+    queens = Enum.filter(value_sorted, fn card -> card.value_text == "Queen" end)
+    kings = Enum.filter(value_sorted, fn card -> card.value_text == "King" end)
+    aces = Enum.filter(value_sorted, fn card -> card.value_text == "Ace" end)
+
+    maybe_royal_hand = tens ++ jacks ++ queens ++ kings ++ aces
+
+    royal_frequencies = Enum.frequencies_by(maybe_royal_hand, fn card -> card.suit_text end)
+
+    royal_flush? = Enum.any?(royal_frequencies, fn {_k, v} -> v == 5 end)
+
     %{
-      highest_hand_card: highest_hand_card,
+      highest_held_card: highest_held_card,
       value_sorted: value_sorted,
       value_pairs: value_pairs,
       value_threes: value_threes,
       value_fours: value_fours,
-      suit_fives: suit_fives
+      suit_fives: suit_fives,
+      head_five_sequence: head_five_sequence,
+      tail_five_sequence: tail_five_sequence
     }
-    |> IO.inspect(limit: :infinity)
     |> (fn %{
-             highest_hand_card: highest_hand_card,
+             highest_held_card: highest_held_card,
              value_sorted: value_sorted,
              value_pairs: value_pairs,
              value_threes: value_threes,
              value_fours: value_fours,
-             suit_fives: suit_fives
+             suit_fives: suit_fives,
+             head_five_sequence: head_five_sequence,
+             tail_five_sequence: tail_five_sequence
            } ->
           %{
             got_a_pair?: if(value_pairs |> Enum.count() == 1, do: true, else: false),
             got_a_two_pair?: if(value_pairs |> Enum.count() == 2, do: true, else: false),
             got_a_three_of_a_kind?: if(value_threes |> Enum.count() == 1, do: true, else: false),
-            # Todo add straight
+            got_a_straight?: if(head_five_sequence or tail_five_sequence, do: true, else: false),
             got_a_flush?: if(suit_fives |> Enum.count() == 1, do: true, else: false),
-            # Todo add full house
-            got_a_four_of_a_kind?: if(value_fours |> Enum.count() == 1, do: true, else: false)
-            # Todo add straight flush
-            # Todo add royal flush
+            got_a_full_house?:
+              if(value_threes |> Enum.count() == 1 and value_pairs |> Enum.count() == 1,
+                do: true,
+                else: false
+              ),
+            got_a_four_of_a_kind?: if(value_fours |> Enum.count() == 1, do: true, else: false),
+            got_a_straight_flush?:
+              if((head_five_sequence or tail_five_sequence) and suit_fives |> Enum.count() == 1,
+                do: true,
+                else: false
+              ),
+            got_a_royal_flush?: if(royal_flush?, do: true, else: false),
+            hand: value_sorted
           }
         end).()
   end
