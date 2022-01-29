@@ -48,7 +48,10 @@ defmodule Poker do
       player_2: (hands |> Enum.at(1))[:hand],
       player_3: (hands |> Enum.at(2))[:hand],
       player_4: (hands |> Enum.at(3))[:hand],
-      player_5: (hands |> Enum.at(4))[:hand]
+      player_5: (hands |> Enum.at(4))[:hand],
+      the_flop: the_flop,
+      the_river: the_river,
+      the_turn: the_turn
     }
   end
 
