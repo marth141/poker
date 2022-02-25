@@ -20,7 +20,7 @@ defmodule Poker do
     Enum.map(1..100_000, fn _n -> Poker.play_a_round() |> Poker.what_do_i_have() end)
   end
 
-  def what_do_i_have(results) do
+  def what_do_i_have(%Poker.Game{} = results) do
     cards = (results.player_1 ++ results.dealer) |> Enum.sort_by(fn card -> card.value_number end)
 
     highest_held_card =
@@ -119,7 +119,7 @@ defmodule Poker do
     {:ok, deck} = view_deck(deck_server)
     {:ok, _confirmation} = destroy_deck(deck_server)
 
-    %{
+    %Poker.Game{
       burned_cards: burned_card_1 ++ burned_card_2 ++ burned_card_3 ++ burned_card_4,
       dealer: the_flop ++ the_turn ++ the_river,
       deck: deck,
